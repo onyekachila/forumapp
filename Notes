@@ -1,0 +1,72 @@
+#Forum
+
+1.  Thread
+2.  Reply
+3.  User
+
+A.  Thread is created by a User
+B.  A reply belongs to a thread, and belongs to a user.
+
+
+Create model Thread and Reply with resource controller.
+Added Migration fields and Factory for Thread using a function to generate the user in the thread since they both have a relationship.
+// $threads = factory('App\Thread', 50)->create()
+for each thread we will create 10 different replies and we also want to associate the replies to the thread id.
+// $threads->each(function($thread) { factory('App\Reply', 10)->create(['thread_id' => $thread->id]);});
+
+
+If you don't want to inline all your seeding then you can create a seeder and put all the calling of factory in your seeder instead of the command line.
+
+Just like so:
+php artisan make:seeder ThreadsTableWithReplySeeder
+Then in your file, write the code in the run method:
+
+
+
+public function run()
+{
+$threads = factory('App\Thread', 50)->create();
+
+$threads->each(function($thread) { factory('App\Reply', 10)->create(['thread_id' => $thread->id]);});
+}
+
+2.  Renamed controllers by pluralizing it. Started setUp for testing by renaming ExampleTest to ThreadsTest
+    Change the database to use sqlite for testing in phpunit.xml
+    then pull in the database migration by using a namespace
+    By ctrl cliking the databaseMigrations within the class we are taken to the trait definition for further inspection
+
+./vendor/bin/phpunit --version
+
+To run the test we must follow this path.
+./vendor/bin/phpunit
+
+After running this it should fail becuse we dont have a route file for it. Hence the need to create one.
+
+The difference between a featured test and unit test is that for feature test we are testing to make sure
+that a feature works the way it is suppose to work i.e. it display the correct result.
+
+unit test on the other hand refers to making calls to methods and classes to make sure that they perform or
+achieve the task they are suppose to.
+
+Switched things up a little bit by creating another sqlite database and seting the path in phpunit.xml
+which I will be using for test as the memory one is not working.
+
+3.  Adding the replies to a thread along side the user who replied a thread. We have to set relationships
+    between the thread and the user as well as using unit testing instead of feature testing to get specific 
+    errors with a bit of refactoring our code base.
+
+    NB: The way we used Reply::class as a relationship in thread model.
+
+4.   Refactor the view to a partial called reply.blade.php and included it in show. 
+    Stopped writing test for the solution to enable me finish faster. Refactored the code to make sure that only authentocated user can 
+    post a reply by adding middleware to the solution.
+
+5.  We want to create a form to enable us add reply. We can use auth->check() to make sure that only signed users have access to the form   
+    in the view to add replies.
+
+    
+
+ 
+
+
+
