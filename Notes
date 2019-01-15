@@ -64,9 +64,19 @@ which I will be using for test as the memory one is not working.
 5.  We want to create a form to enable us add reply. We can use auth->check() to make sure that only signed users have access to the form   
     in the view to add replies.
 
-    
+8.  Refactored the code to use resource route.
 
- 
+9.  A thread should be assigned to a channel. We created a channel model, created migration and relationship because a thread belongs to a channel
+    then  in the thread migration table we create an unsignedInteger integer for the channel so the relationship is complete. Finally we refactor the
+    path method to include the channel and the slug.  We did migrate:refresh to refresh our database so that a thread belongs to a channel as well as
+    the refactoring of user factory to contain channel and while we are creating a thread we also create a channel so that the relationship is complete
+    
+    
+    Changed back to normal route instead of resource route especially for a single thread where I included a channel before the thread id.
+    we also need to change the parameter in the show method of the thread controller to match the route. We do the same for replies controller
+    add additional paameter to the replies store method ($channeId) in this case and well as the route.
+
+10.  Adding Validation
 
 
 
