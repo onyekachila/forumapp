@@ -84,7 +84,24 @@ which I will be using for test as the memory one is not working.
 
       We refactored the index method and in the channel model we tell laravel to use the slug as the key by overriding the getRouteKeyName method.
       We also create a relationship between a channel and a thread. A channel can have many threads (one to many relationship).
-      
+      Added a menu to create a new thread using bootsrap 4 and display all threads menu too.
+
+12.   Now we need to add validation and probably display errors while trying to use the form for the create a new thread. We also add the old data by adding
+        a helper in the view {{ old('title') }} and {{ old('body') }} for title so that it can remember the last thing that was posted.
+      Included the $request object before doing validation else it wont work on the store method. I forgot so I had to put it back for it to work.
+      Then we include the validation error underneath the submit button formatting it with a bootstrap class.
+
+      we can use the code // dd(request()->all()); to check if our form is submitting.
+
+      Added browser validation as well as reselecting the option selected in the dropdown if there is an error in the other fields.
+
+
+
+
+
+
+
+
 
 
 
