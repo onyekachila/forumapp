@@ -27,4 +27,6 @@ Route::get('/threads/create', 'ThreadsController@create');
 //Route::resource('threads', 'ThreadsController');
 
 
+Route::get('/threads/{channel}', 'ThreadsController@index');
+
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
