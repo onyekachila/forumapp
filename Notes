@@ -95,6 +95,13 @@ which I will be using for test as the memory one is not working.
 
       Added browser validation as well as reselecting the option selected in the dropdown if there is an error in the other fields.
 
+13.   Removed the code from the view and move it to a view composer as well as charing it with all the views created. This makes our view clean.
+
+14.     A user can filter threads by username. So we refactor the code by removing the get() and including the get() at the bottom after adding that a logged in user
+        can filter threads created by himself.
+15. 
+
+
 
 
 
