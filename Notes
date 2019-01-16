@@ -99,7 +99,28 @@ which I will be using for test as the memory one is not working.
 
 14.     A user can filter threads by username. So we refactor the code by removing the get() and including the get() at the bottom after adding that a logged in user
         can filter threads created by himself.
-15. 
+
+15.    Refactoring of the code.
+        First of we refactor the index method into a getThreads method and call it in index.
+        We will create a dedicated filtering class such that whenever we want to do some filtering based on different category we can just do it there
+
+        So we create a folder in the apps directory and call it Filters inside of which we will have our ThreadsFilter.php class.
+        Then we inject the filters as a parameter as well as referencing the namespace so we can filter based on different parameter.
+
+        In the thread model we will add a method called scopeFilter where we accept a set of query scope filters that will accept the query
+        and then pass that through to the filters. What this means is that from the thread controller in the index method, we are calling Thread::filters
+        meaning filter it down according to the passed in parameter filter in the index method then get it and store in $threads.
+
+        Now we create the apply method in the threadsfilter class and pass in a query builder parameter to help us. So we go the the getThreads method in the 
+        controller and move out a portion of the code to the apply method. i.e. the request by portion. and we also create a constructor
+        to pass in the request while also creating a field. We also reference the Request namespace. 
+
+        We delete the getThreads method and take the code back to index method as part of our refactoring. Comment out the code we moves to the 
+        apply method. Then we call the filter method and filter according to the filter we injected in the index method and get the result.
+
+        We continue the refactoring by extracting a method called by to hold the criteria i.e. get all threads where the user id is equal this one.
+
+        
 
 
 
