@@ -80,7 +80,11 @@ which I will be using for test as the memory one is not working.
 
 11.   A user can filter thread by chanel. Refactored index method of the threadcontroller to return all thread with a channelSlug if there is a one 
       else return just threads without the channelslug.  We also filter by saying channel where the slug is equal to channelSlug so we grab the first
-      and also we get the if and store in a variable called channelId. Remmember to import the app/channel
+      and also we get the if and store in a variable called channelId. Remmember to import the app/channel.
+
+      We refactored the index method and in the channel model we tell laravel to use the slug as the key by overriding the getRouteKeyName method.
+      We also create a relationship between a channel and a thread. A channel can have many threads (one to many relationship).
+      
 
 
 
