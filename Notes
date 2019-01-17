@@ -120,6 +120,9 @@ which I will be using for test as the memory one is not working.
 
         We continue the refactoring by extracting a method called by to hold the criteria i.e. get all threads where the user id is equal this one.
 
+        We refactored the threadfilter to have an abstract class. 
+
+
         
 
 
