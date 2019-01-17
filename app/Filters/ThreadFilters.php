@@ -2,15 +2,22 @@
 
 namespace App\Filters;
 
-use Illuminate\Http\Request;
 use App\User;
 
 class ThreadFilters extends Filters
 {
-    protected $filters = ['by'];
-   
     /**
-     * FIlter the query by a given username
+     * Registered filters to operate upon.
+     *
+     * @var array
+     */
+    protected $filters = ['by', 'popular', 'unanswered'];
+
+    /**
+     * Filter the query by a given username.
+     *
+     * @param  string $username
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     protected function by($username)
     {

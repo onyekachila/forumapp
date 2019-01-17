@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\ThreadFilters; 
+use App\Filters\ThreadFilters;
 use App\Thread;
 use App\Channel;
 use Illuminate\Http\Request;
@@ -21,25 +21,7 @@ class ThreadsController extends Controller
      */
     public function index(Channel $channel, ThreadFilters $filters)
     {
-        if ($channel->exists) {
-            $threads = $channel->threads()->latest();
-        } else {
-            $threads = Thread::latest(); 
-        }
-
-        // we want to filter by the given  if we have a request (''by)
-        
-        // if($username = request('by')){
-        //     $user = \App\User::where('name', $username)->firstOrFail();
-
-        //     $threads->where('user_id', $user->id); 
-        // }
-
-        $threads = $threads->filter($filters)->get(); 
-
-        
-        $threads = Thread::filter($filters)->get();
-        
+        $threads = $this->getThreads($channel, $filters);
         return view('threads.index', compact('threads'));
     }
 
@@ -61,8 +43,6 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
@@ -88,7 +68,16 @@ class ThreadsController extends Controller
     public function show($channelId, Thread $thread)
     {
         // return $thread;
-        return view('threads.show', compact('thread'));
+
+        // return $thread->load('replies'); // This will eager load the replies
+
+        //return $thread;
+        //return view('threads.show', compact('thread'));
+
+        return view('threads.show', [
+            'thread' => $thread,
+            'replies' => $thread->replies()->paginate(20)
+        ]);
     }
 
     /**
@@ -125,5 +114,21 @@ class ThreadsController extends Controller
         //
     }
 
-   
+    /**
+    * @param Channel       $channel
+    * @param ThreadFilters $filters
+    * @return mixed
+    */
+    protected function getThreads(Channel $channel, ThreadFilters $filters)
+    {
+        if ($channel->exists) {
+            $threads = $channel->threads()->latest();
+        } else {
+            $threads = Thread::latest();
+        }
+
+        $threads = Thread::filter($filters)->get();
+        
+        return $threads;
+    }
 }

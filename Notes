@@ -121,6 +121,19 @@ which I will be using for test as the memory one is not working.
         We continue the refactoring by extracting a method called by to hold the criteria i.e. get all threads where the user id is equal this one.
 
         We refactored the threadfilter to have an abstract class. 
+        Committed to git and continued refactoring. 
+        Instead of hard coding the by() method we are refactoring to use a loop to get the exact criteria to use for filtering. 
+        as well as checking if the request has the filter then only in that case should we filter it down.
+        Finally we refactor everything into a method called hasFilter and call it in the apply method above.
+        Did more refactoring by changing hasFilters to getFilters and moved around the code.
+
+        Refactor the index method of the threads controller to have a method called get threads.
+
+16.     UI works. As well as displaying the creator of the thread and the replies count. In the controller I am going to comment out 
+        other ways to achieve this in the show method.
+
+        Added a boot method and it says for all the queries of thread we need you to include replies in this particular scope. Which is 
+        to include replies count. This method is known as using global query scope
 
 
         
