@@ -133,7 +133,7 @@ which I will be using for test as the memory one is not working.
         other ways to achieve this in the show method.
 
         Added a boot method and it says for all the queries of thread we need you to include replies in this particular scope. Which is 
-        to include replies count. This method is known as using global query scope
+        to include replies count. This method is known as using global query scope.
 
 
         
